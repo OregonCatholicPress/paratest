@@ -195,10 +195,12 @@ class ResultPrinter
             throw new \RuntimeException(sprintf(
                 "%s\n" .
                 "The process: %s\n" .
-                "This means a PHPUnit process was unable to run \"%s\"\n" ,
+                "This means a PHPUnit process was unable to run \"%s\"\n" .
+                "This is the stdout: \"%s\"\n",
                 $e->getmessage(),
                 $test->getLastCommand(),
-                $test->getPath()
+                $test->getPath(),
+                $test->getStdout()
             ));
         }
         if (!$reader->hasResults()) {
