@@ -62,11 +62,22 @@ class Parser
             ? null
             : new ParsedClass(
                 $this->refl->getDocComment(),
-                $this->refl->getName(),
+                $this->getCleanReflectionName(),
                 $this->refl->getNamespaceName(),
                 $this->getMethods()
             );
     }
+
+    /**
+     * Return reflection name with null bytes stripped
+     *
+     * @return string
+     */
+     private function getCleanReflectionName()
+     {
+          return str_replace("\x00", '', $this->refl->getName());
+     }
+
 
     /**
      * Return all test methods present in the file
